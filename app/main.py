@@ -66,3 +66,10 @@ async def startup_event():
     port = os.environ.get("PORT", "10000")
     logger.info(f"Starting app on port {port}")
     logger.info("Image Tools API startup complete")
+
+# Main execution per Render
+if __name__ == "__main__":
+    import uvicorn
+    port = int(os.environ.get("PORT", 10000))
+    logger.info(f"Starting server on 0.0.0.0:{port}")
+    uvicorn.run(app, host="0.0.0.0", port=port)
