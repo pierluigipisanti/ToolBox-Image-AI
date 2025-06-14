@@ -2,5 +2,5 @@ fastapi
 uvicorn
 rembg
 pillow
-python-multipart  # per gestire upload file
-
+python-multipart
+onnxruntime
