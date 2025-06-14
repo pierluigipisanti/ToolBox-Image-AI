@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Image Tools</title>
+</head>
+<body>
+  <h2>Rimozione sfondo</h2>
+  <form id="bg-form">
+    <input type="file" name="file" required>
+    <button type="submit">Rimuovi sfondo</button>
+  </form>
+  <br>
+  <h2>Resize immagine</h2>
+  <form id="resize-form">
+    <input type="file" name="file" required><br>
+    Larghezza: <input type="number" name="width" value="300"><br>
+    Altezza: <input type="number" name="height" value="300"><br>
+    <button type="submit">Resize</button>
+  </form>
+  <br>
+  <img id="result" style="max-width:300px; margin-top:20px;"/>
+
+<script>
+document.getElementById('bg-form').onsubmit = async (e) => {
+  e.preventDefault();
+  const form = new FormData(e.target);
+  const res = await fetch('/remove-bg', { method: 'POST', body: form });
+  const blob = await res.blob();
+  document.getElementById('result').src = URL.createObjectURL(blob);
+};
+
+document.getElementById('resize-form').onsubmit = async (e) => {
+  e.preventDefault();
+  const form = new FormData(e.target);
+  const res = await fetch('/resize', { method: 'POST', body: form });
+  const blob = await res.blob();
+  document.getElementById('result').src = URL.createObjectURL(blob);
+};
+</script>
+</body>
+</html>
